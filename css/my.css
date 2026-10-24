@@ -229,8 +229,13 @@ canvas#englishCanvas {
       rgba(3, 7, 18, 0.95) 100%);
 }
 
-/* ترتيب طبقات الصفحة */
-.header-placeholder,
+/* ترتيب طبقات الصفحة - حل مشكلة الهيدر نهائياً */
+.header-placeholder {
+  position: relative;
+  z-index: 9999;
+  /* رفع طبقة حاوية الهيدر لتكون فوق الـ main دائماً */
+}
+
 main,
 footer {
   position: relative;
@@ -252,7 +257,6 @@ body.loading .english-bg-container {
 
 .header-placeholder {
   position: relative;
-
 }
 
 .header-placeholder {
@@ -269,6 +273,8 @@ header {
   padding: 7px 5px;
   box-shadow: var(--box-shadow);
   border-radius: 0;
+  z-index: 99999 !important;
+  /* ضمان إنه فوق كل أقسام الصفحة أثناء التمرير */
 }
 
 /* Floating Header */
@@ -279,6 +285,8 @@ header.floating {
   left: 15px;
   border-radius: 50px;
   animation: header-appear 0.4s ease both;
+  z-index: 99999 !important;
+  /* ضمان إنه فوق كل أقسام الصفحة أثناء التمرير */
 }
 
 @keyframes header-appear {
@@ -1932,8 +1940,10 @@ header .header-links a:focus-visible {
   }
 
   .hero .container {
-    align-items: flex-end;
-    padding: 180px 20px 45px;
+    flex-direction: column-reverse;
+    /* بيخلي الكلام فوق والصورة تحتها أو العكس حسب رغبتك بكل مرتبة وسلاسة */
+    text-align: center;
+    gap: 30px;
   }
 
   .hero .content {
