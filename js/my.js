@@ -80,31 +80,51 @@ if (menuToggle && mainNav) {
 }
 
 
-/* ==================== Theme Toggle ==================== */
+/* ==================== Theme Toggle with LocalStorage ==================== */
 
-function updateTheme() {
-  if (!themeToggle) return;
-
-  const isDark = !themeToggle.checked;
-
-  document.body.classList.toggle("theme-dark", isDark);
-  document.body.classList.toggle("theme-light", !isDark);
-
-  document.body.style.setProperty(
-    "--page-background",
-    isDark ? "#030712" : "#f8fafc"
-  );
-
-  document.body.style.setProperty(
-    "--text-color",
-    isDark ? "#ffffff" : "#0f172a"
-  );
+function applyTheme(isLight) {
+  document.body.classList.toggle("theme-light", isLight);
+  document.body.classList.toggle("theme-dark", !isLight);
 }
 
 if (themeToggle) {
-  updateTheme();
+  // 1. استرجاع الوضع المحفوظ مسبقاً من المتصفح عند فتح الصفحة
+  const savedTheme = localStorage.getItem("theme");
 
-  themeToggle.addEventListener("change", updateTheme);
+  if (savedTheme === "light") {
+    themeToggle.checked = true;
+    applyTheme(true);
+  } else {
+    themeToggle.checked = false;
+    applyTheme(false);
+  }
+
+  // 2. تبديل الكلاس وحفظ الاختيار عند الضغط على الزر
+  themeToggle.addEventListener("change", () => {
+    const isLight = themeToggle.checked;
+    applyTheme(isLight);
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  });
+}
+
+if (themeToggle) {
+  // 1. استرجاع الوضع المحفوظ مسبقاً في المتصفح عند فتح الصفحة
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    themeToggle.checked = true;
+    applyTheme(true);
+  } else {
+    themeToggle.checked = false;
+    applyTheme(false);
+  }
+
+  // 2. حفظ الاختيار الجديد عند الضغط على زر التبديل
+  themeToggle.addEventListener("change", () => {
+    const isLight = themeToggle.checked;
+    applyTheme(isLight);
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  });
 }
 
 
@@ -616,7 +636,8 @@ if (intro && introSeen) {
     mouse.x += (mouse.targetX - mouse.x) * 0.08;
     mouse.y += (mouse.targetY - mouse.y) * 0.08;
 
-    ctx.fillStyle = "#030712";
+    // تتغير خلفية الكانفاس تلقائياً حسب الثيم (أبيض في الفاتح - أسود في الليلي)
+    ctx.fillStyle = document.body.classList.contains("theme-light") ? "#ffffff" : "#030712";
     ctx.fillRect(0, 0, width, height);
 
     time += 0.015;
@@ -654,3 +675,9 @@ if (intro && introSeen) {
 
   animate();
 })();
+
+// Auto Update Copyright Year
+const yearSpan = document.querySelector("#currentYear");
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}
