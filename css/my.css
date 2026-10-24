@@ -11,8 +11,8 @@
   /* Main Colors */
   --main-color: #0bacbd;
   --main-color-alt: #0080b3;
-  --page-background: #272525;
-  --text-color: #fff;
+  /* --page-background: #272525;
+  --text-color: #fff; */
 
   /* Other Variables */
   --main-transition: 0.3s ease;
@@ -55,29 +55,34 @@ body.loading {
   overflow: hidden;
 }
 
-/* الوضع الفاتح (Light Mode) - خلفية بيضاء وحروف زرقاء */
-body.theme-light {
-  --page-background: #ffffff;
-  /* خلفية بيضاء صافية تماماً */
-  --text-color: #0f172a;
-  /* لون النصوص الأساسية داكن وواضح */
-  --text-muted: #475569;
-  /* لون النصوص الفرعية */
-  --card-bg: rgba(255, 255, 255, 0.95);
-  /* خلفية الكروت بيضاء نقية */
-  --card-border: rgba(11, 172, 189, 0.3);
-  /* حدود الكروت بلون أزرق هادي */
-  --header-bg: rgba(255, 255, 255, 0.9);
-  /* هيدر أبيض ومرتب */
-  --box-shadow: 0 4px 20px rgba(11, 172, 189, 0.15);
-}
-
-body.theme-dark {
+/* الوضع الليلي (Dark Mode) */
+body.theme-dark,
+body:not(.theme-light) {
   --page-background: #0b0f19;
   --text-color: #ffffff;
-  --card-bg: rgba(15, 23, 42, 0.65);
-  --card-border: rgba(56, 189, 248, 0.2);
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --card-bg: rgba(15, 23, 42, 0.75);
+  /* أزرق داكن شفاف جلاسي */
+  --card-border: rgba(56, 189, 248, 0.25);
   --header-bg: rgba(15, 23, 42, 0.85);
+  --box-shadow: 0 0 15px rgba(11, 172, 189, 0.25);
+}
+
+/* الوضع الفاتح (Light Mode) - خلفية هادية جداً مش حادة، والكروت ثابتة أزرق داكن جلاسي فخم */
+body.theme-light {
+  --page-background: #e2e8f0;
+  /* خلفية رمادي/أزرق فاتح وهادي جداً مريح للعين ومش ساطع */
+  --text-color: #272222;
+  /* النصوص جوه الكروت بيضاء وواضحة جداً */
+  --text-muted: #cbd5e1;
+  /* النصوص الفرعية رمادي فاتح مريح */
+  --card-bg: rgba(11, 23, 42, 0.88);
+  /* ثبات الكروت على الأزرق الداكن الشفاف الجلاسي زي ما طلبت! */
+  --card-border: rgba(11, 172, 189, 0.4);
+  /* حدود زرقاء متناسقة ومنورة بشياكة */
+  --header-bg: rgba(11, 23, 42, 0.9);
+  /* هيدر متناسق مع لون الكروت */
+  --box-shadow: 0 10px 30px -5px rgba(11, 171, 189, 0.824);
 }
 
 ::selection {
@@ -249,10 +254,7 @@ canvas#englishCanvas {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at center,
-      transparent 30%,
-      rgba(3, 7, 18, 0.75) 80%,
-      rgba(3, 7, 18, 0.95) 100%);
+  background: var(--vignette-color);
 }
 
 /* ترتيب طبقات الصفحة - حل مشكلة الهيدر نهائياً */
@@ -2020,7 +2022,7 @@ header .header-links a:focus-visible {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--card-border, rgba(56, 189, 248, 0.2));
-  color: var(--text-color, #ffffff);
+  color: #ffffff;
 }
 
 .footer-content {
@@ -2059,7 +2061,7 @@ header .header-links a:focus-visible {
 .footer-logo-text .name {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text-color, #ffffff);
+  color: #ffffff;
 }
 
 .footer-logo-text .sub {
@@ -2070,7 +2072,7 @@ header .header-links a:focus-visible {
 
 .footer-bio {
   font-size: var(--fs-small, 0.9rem);
-  color: var(--text-color);
+  color: #ffffff;
   opacity: 0.75;
   line-height: 1.8;
 }
@@ -2117,7 +2119,8 @@ header .header-links a:focus-visible {
 .social-btn.whatsapp:hover {
   background: #25d366;
   border-color: #25d366;
-  color: #030712;
+  color: var(--main-color, #0bacbd);
+  color: #ffffff;
   box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
 }
 
@@ -2149,7 +2152,7 @@ header .header-links a:focus-visible {
 
 .footer-bottom {
   font-size: 0.88rem;
-  color: var(--text-color);
+  color: var(--main-color, #0bacbd);
   opacity: 0.85;
   gap: 15px;
   flex-wrap: wrap;
@@ -2181,7 +2184,7 @@ header .header-links a:focus-visible {
 
 .dev-link:hover {
   background: var(--main-color, #0bacbd);
-  color: #030712;
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(11, 172, 189, 0.3);
 }
