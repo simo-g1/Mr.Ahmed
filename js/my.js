@@ -664,8 +664,8 @@ function initScrollReveal() {
 
   const observerOptions = {
     root: null,
-    rootMargin: "0px 0px -30px 0px",
-    threshold: 0.10
+    rootMargin: "0px 0px -50px 0px",
+    threshold: 0.05
   };
 
   const observer = new IntersectionObserver((entries, observerInstance) => {
@@ -685,12 +685,11 @@ function finishIntro() {
     intro.classList.add("is-hidden");
     setTimeout(() => {
       intro.classList.add("is-removed");
-    }, 400); // إزالة العنصر تماماً من الـ DOM بعد انتهاء الـ Transition
+    }, 400);
   }
 
   document.body.classList.remove("loading");
 
-  // مسح الـ Hash من الرابط عشان الصفحة ما تفتحش عند #cv وتفضل في الأول
   if (window.location.hash) {
     history.replaceState(null, null, window.location.pathname);
   }
@@ -699,16 +698,17 @@ function finishIntro() {
   introFinished = true;
   updateHeader();
 
-  // إظهار عناصر الهيرو فوراً والباقي بالـ Observer
+  // إظهار عناصر الهيرو فوراً والباقي يظهر تدريجياً بالـ Scroll
   document.querySelectorAll(".hero .reveal-item").forEach(el => {
     el.classList.add("is-visible");
   });
+
+  // تشغيل الـ Observer لباقي أقسام الموقع
   initScrollReveal();
 }
 
-// تشغيل الـ Intro لمدة 3 ثوانٍ ثم إنهائه بسلاسة
+// تشغيل الـ Intro لمدة 3 ثوانٍ ثم إنهاؤه وتشغيل الموقع
 if (intro) {
-  // للتجربة دائماً: شيلنا الاعتماد على sessionStorage عشان الانترو يشتغل معاك كل ما تحدث وتتأكد بنفسك
   window.setTimeout(() => {
     finishIntro();
   }, 3000);

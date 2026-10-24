@@ -2288,20 +2288,13 @@ body.theme-light .intro {
 /* ==================== Smooth & Delayed Scroll Reveal ==================== */
 .reveal-item {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-/* بمجرد ظهور العنصر أو جهوزية الصفحة يظهر بسلاسة */
-body.content-ready .reveal-item.is-visible,
-.reveal-item.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* حل احتياطي للطوارئ: لو الـ JS متأخرش، العناصر تظهر بعد الانترو تلقائياً */
-body:not(.loading) .reveal-item {
+/* تظهر فقط عندما يضيف الجافاسكريبت كلاس is-visible أو عندما تكون محملة بالـ content-ready */
+body.content-ready .reveal-item.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
