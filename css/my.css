@@ -1272,9 +1272,8 @@ header .header-links a:focus-visible {
   width: 280px;
   height: 280px;
   object-fit: cover;
-  border-radius: 60px;
+  border-radius: 50%;
   padding: 10px;
-  filter: brightness(0.5) opacity(0.7);
   border: 3px solid rgba(56, 189, 248, 0.5);
   box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), inset 0 0 15px rgba(56, 189, 248, 0.2);
 }
