@@ -99,27 +99,7 @@ if (themeToggle) {
     applyTheme(false);
   }
 
-  // 2. تبديل الكلاس وحفظ الاختيار عند الضغط على الزر
-  themeToggle.addEventListener("change", () => {
-    const isLight = themeToggle.checked;
-    applyTheme(isLight);
-    localStorage.setItem("theme", isLight ? "light" : "dark");
-  });
-}
-
-if (themeToggle) {
-  // 1. استرجاع الوضع المحفوظ مسبقاً في المتصفح عند فتح الصفحة
-  const savedTheme = localStorage.getItem("theme");
-
-  if (savedTheme === "light") {
-    themeToggle.checked = true;
-    applyTheme(true);
-  } else {
-    themeToggle.checked = false;
-    applyTheme(false);
-  }
-
-  // 2. حفظ الاختيار الجديد عند الضغط على زر التبديل
+  // 2. تبديل الكلاس وحفظ الاختيار عند الضغط على الزر (بدون أي تكرار)
   themeToggle.addEventListener("change", () => {
     const isLight = themeToggle.checked;
     applyTheme(isLight);
@@ -177,34 +157,32 @@ if (header) {
     }
   });
 }
-
-
-/* ==================== Intro Animation ==================== */
-
+/* ==================== Intro Animation Integration ==================== */
 const introSeen = sessionStorage.getItem("introSeen");
 
-if (intro && introSeen) {
-  intro.classList.add("is-hidden", "is-removed");
-
+function finishIntro() {
+  if (intro) {
+    intro.classList.add("is-hidden", "is-removed");
+  }
   document.body.classList.remove("loading");
-
   introFinished = true;
-
   updateHeader();
+
+  // تشغيل الـ Reveal فور اختفاء الـ Intro
+  if (typeof window.initScrollReveal === "function") {
+    window.initScrollReveal();
+  }
+}
+
+if (intro && introSeen) {
+  finishIntro();
 } else if (intro) {
   sessionStorage.setItem("introSeen", "true");
 
   window.setTimeout(() => {
     intro.classList.add("is-hidden");
-
     window.setTimeout(() => {
-      intro.classList.add("is-removed");
-
-      introFinished = true;
-
-      updateHeader();
-
-      document.body.classList.remove("loading");
+      finishIntro();
     }, 350);
   }, 3000);
 }
@@ -222,19 +200,10 @@ if (intro && introSeen) {
 
   if (!ctx) return;
 
-  /*
-    Move the existing background container outside the Hero
-    so the same canvas can appear behind the Intro and the page.
-  */
-
   if (container.parentElement !== document.body) {
     document.body.prepend(container);
   }
 
-  // Disable the right-click menu across the page.
-
-
-  // Handle Canvas Resizing
   let width;
   let height;
 
@@ -247,7 +216,6 @@ if (intro && introSeen) {
 
   window.addEventListener("resize", resizeCanvas);
 
-  // Mouse Dynamics & Tracking
   const mouse = {
     x: width / 2,
     y: height / 2,
@@ -266,7 +234,6 @@ if (intro && introSeen) {
     mouse.active = false;
   });
 
-  // Interactive Click Particle Burst Array
   let burstParticles = [];
 
   window.addEventListener("click", (event) => {
@@ -636,7 +603,6 @@ if (intro && introSeen) {
     mouse.x += (mouse.targetX - mouse.x) * 0.08;
     mouse.y += (mouse.targetY - mouse.y) * 0.08;
 
-    // تتغير خلفية الكانفاس تلقائياً حسب الثيم (أبيض في الفاتح - أسود في الليلي)
     ctx.fillStyle = document.body.classList.contains("theme-light") ? "#ffffff" : "#030712";
     ctx.fillRect(0, 0, width, height);
 
@@ -680,4 +646,73 @@ if (intro && introSeen) {
 const yearSpan = document.querySelector("#currentYear");
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
+}
+
+/* ==================== Intro Animation & Scroll Reveal Integration ==================== */
+
+function initScrollReveal() {
+  document.body.classList.add("content-ready");
+
+  const revealElements = document.querySelectorAll(".reveal-item");
+  if (!revealElements.length) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) {
+    revealElements.forEach(el => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px 0px -30px 0px",
+    threshold: 0.10
+  };
+
+  const observer = new IntersectionObserver((entries, observerInstance) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observerInstance.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => observer.observe(el));
+}
+
+function finishIntro() {
+  if (intro) {
+    intro.classList.add("is-hidden");
+    setTimeout(() => {
+      intro.classList.add("is-removed");
+    }, 400); // إزالة العنصر تماماً من الـ DOM بعد انتهاء الـ Transition
+  }
+
+  document.body.classList.remove("loading");
+
+  // مسح الـ Hash من الرابط عشان الصفحة ما تفتحش عند #cv وتفضل في الأول
+  if (window.location.hash) {
+    history.replaceState(null, null, window.location.pathname);
+  }
+  window.scrollTo(0, 0);
+
+  introFinished = true;
+  updateHeader();
+
+  // إظهار عناصر الهيرو فوراً والباقي بالـ Observer
+  document.querySelectorAll(".hero .reveal-item").forEach(el => {
+    el.classList.add("is-visible");
+  });
+  initScrollReveal();
+}
+
+// تشغيل الـ Intro لمدة 3 ثوانٍ ثم إنهائه بسلاسة
+if (intro) {
+  // للتجربة دائماً: شيلنا الاعتماد على sessionStorage عشان الانترو يشتغل معاك كل ما تحدث وتتأكد بنفسك
+  window.setTimeout(() => {
+    finishIntro();
+  }, 3000);
+} else {
+  document.body.classList.remove("loading");
+  initScrollReveal();
 }

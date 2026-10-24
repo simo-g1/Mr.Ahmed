@@ -11,8 +11,6 @@
   /* Main Colors */
   --main-color: #0bacbd;
   --main-color-alt: #0080b3;
-  /* --page-background: #272525;
-  --text-color: #fff; */
 
   /* Other Variables */
   --main-transition: 0.3s ease;
@@ -69,20 +67,40 @@ body:not(.theme-light) {
 }
 
 /* الوضع الفاتح (Light Mode) - خلفية هادية جداً مش حادة، والكروت ثابتة أزرق داكن جلاسي فخم */
+/* الوضع الفاتح (Light Mode) - تنسيق دقيق وواضح للنصوص والأزرار */
 body.theme-light {
-  --page-background: #e2e8f0;
-  /* خلفية رمادي/أزرق فاتح وهادي جداً مريح للعين ومش ساطع */
-  --text-color: #272222;
-  /* النصوص جوه الكروت بيضاء وواضحة جداً */
-  --text-muted: #cbd5e1;
-  /* النصوص الفرعية رمادي فاتح مريح */
+  --page-background: #dbe2ef;
+  /* خلفية رمادي أزرق هادي ومريح */
+  --text-color: #0f172a;
+  /* نص أساسي داكن وواضح جداً للقراءة */
+  --text-muted: #1e293b;
+  /* نصوص فرعية غامقة وواضحة (منع البهتان) */
   --card-bg: rgba(11, 23, 42, 0.88);
-  /* ثبات الكروت على الأزرق الداكن الشفاف الجلاسي زي ما طلبت! */
+  /* ثبات الكروت على الأزرق الداكن الشفاف */
   --card-border: rgba(11, 172, 189, 0.4);
-  /* حدود زرقاء متناسقة ومنورة بشياكة */
   --header-bg: rgba(11, 23, 42, 0.9);
-  /* هيدر متناسق مع لون الكروت */
-  --box-shadow: 0 10px 30px -5px rgba(11, 171, 189, 0.824);
+  --box-shadow: 0 10px 30px -5px rgba(11, 171, 189, 0.809);
+}
+
+/* تعديل النصوص داخل الـ Hero في الوضع الفاتح لضمان الوضوح التام */
+body.theme-light .hero .content .hero-message {
+  color: #1e293b !important;
+  /* لون داكن وواضح بدل الرمادي الباهت */
+  opacity: 0.9;
+}
+
+body.theme-light .hero .content .hero-message h2 {
+  color: #0f172a !important;
+}
+
+body.theme-light .hero .content .teacher-info {
+  color: #0f172a !important;
+  font-weight: 600;
+}
+
+/* تظبيط أزرار الـ Hero في الوضع الفاتح */
+body.theme-light .hero .content .links a {
+  font-weight: 700;
 }
 
 ::selection {
@@ -273,11 +291,6 @@ footer {
 /* أثناء ظهور الـ Intro */
 body.loading .english-bg-container {
   z-index: 1500;
-}
-
-/* الـ Intro يظل فوق الخلفية */
-.intro {
-  z-index: 2000;
 }
 
 /* end bg */
@@ -686,7 +699,7 @@ header .header-links a:focus-visible {
   --intro-white: #f4f7fc;
 
   position: fixed;
-  z-index: 2000;
+  z-index: 1103123231231213212331223123120000;
   inset: 0;
   isolation: isolate;
   display: flex;
@@ -1316,16 +1329,8 @@ body.theme-light .intro {
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: 100vh;
   background-color: transparent;
   overflow: hidden;
-}
-
-
-.hero .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .hero .image {
@@ -1387,6 +1392,11 @@ body.theme-light .intro {
 .hero .content {
   direction: rtl;
   color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 620px;
 }
 
 .hero .content .eyebrow {
@@ -1396,7 +1406,8 @@ body.theme-light .intro {
 
 .hero .content .main-text {
   font-size: var(--fs-h1);
-  padding: 15px 0px 15px;
+  padding: 0px 0px 15px;
+  line-height: 1.2;
 }
 
 .main-text span {
@@ -1421,17 +1432,32 @@ body.theme-light .intro {
   flex-direction: column;
   gap: 10px;
   padding: 0px 0px 10px;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.9;
 }
 
 .hero .content .hero-message {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   color: #777;
+  font-size: var(--fs-body);
 }
 
 .hero .content .hero-message h2 {
   color: rgb(97 100 97);
+}
+
+.hero .content .hero-message h3 {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+
+.hero .content .hero-message p {
+  line-height: 1.7;
+  margin: 0;
 }
 
 .hero .content .teacher-info,
@@ -1445,6 +1471,8 @@ body.theme-light .intro {
   align-items: center;
   gap: 10px;
   padding: 10px 0;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 /* ## Start Hero Buttons ## */
@@ -2028,6 +2056,7 @@ body.theme-light .intro {
 
   .hero .content .links {
     justify-content: center;
+    margin: 0 auto;
   }
 }
 
@@ -2254,4 +2283,42 @@ body.theme-light .intro {
     justify-content: center;
     text-align: center;
   }
+}
+
+/* ==================== Smooth & Delayed Scroll Reveal ==================== */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* بمجرد ظهور العنصر أو جهوزية الصفحة يظهر بسلاسة */
+body.content-ready .reveal-item.is-visible,
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* حل احتياطي للطوارئ: لو الـ JS متأخرش، العناصر تظهر بعد الانترو تلقائياً */
+body:not(.loading) .reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero .reveal-item {
+  transition-delay: 0.4s;
+}
+
+.main-text span {
+  display: inline-block;
+  animation: wobble 7s ease-out infinite;
+}
+
+/* إخفاء الهيدر تماماً طالما أن الـ Intro يعمل ولم يتم إزالته */
+body.loading header,
+.intro:not(.is-removed)~.header-placeholder header {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }

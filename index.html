@@ -23,7 +23,7 @@
     rel="stylesheet">
 </head>
 
-<body>
+<body class="loading">
   <!-- BACKGROUND ENGINE CONTAINER -->
   <div class="english-bg-container" id="bgContainer" aria-hidden="true">
     <canvas id="englishCanvas"></canvas>
@@ -138,11 +138,11 @@
 
   <!-- ## Start Main Content ## -->
   <main>
+    <!-- ## Start Hero Section ## -->
     <section class="hero section-padding">
+      <div class="container flex-between">
 
-      <div class="container">
-
-        <div class="image">
+        <div class="image reveal-item">
           <img src="assets/imgs/mainPhoto.webp" alt="الأستاذ أحمد المرسي">
 
           <div class="floating-badge">
@@ -151,7 +151,7 @@
           </div>
         </div>
 
-        <div class="content">
+        <div class="content reveal-item">
           <p class="eyebrow">مستر</p>
 
           <h1 class="main-text">
@@ -185,11 +185,13 @@
 
       </div>
     </section>
+    <!-- ## End Hero Section ## -->
+
     <!-- ## Start About Section ## -->
-    <section class="about section-padding" id="about">
+    <section class="about section-padding reveal-item" id="about">
       <div class="container">
 
-        <div class="section-heading">
+        <div class="section-heading reveal-item">
           <p class="section-eyebrow">GET TO KNOW ME</p>
           <h2>مين هو <span>مستر أحمد؟</span></h2>
           <p class="section-description">
@@ -199,7 +201,7 @@
 
         <div class="about-content">
 
-          <div class="about-card about-intro-card">
+          <div class="about-card about-intro-card reveal-item">
             <span class="about-card-icon">
               <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
             </span>
@@ -215,7 +217,7 @@
 
           <div class="about-highlights">
 
-            <article class="about-card">
+            <article class="about-card reveal-item">
               <span class="about-card-icon">
                 <i class="fa-solid fa-award" aria-hidden="true"></i>
               </span>
@@ -226,7 +228,7 @@
               </div>
             </article>
 
-            <article class="about-card">
+            <article class="about-card reveal-item">
               <span class="about-card-icon">
                 <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
               </span>
@@ -237,7 +239,7 @@
               </div>
             </article>
 
-            <article class="about-card">
+            <article class="about-card reveal-item">
               <span class="about-card-icon">
                 <i class="fa-solid fa-book-open" aria-hidden="true"></i>
               </span>
@@ -251,7 +253,7 @@
           </div>
         </div>
 
-        <div class="about-quote">
+        <div class="about-quote reveal-item">
           <i class="fa-solid fa-quote-right" aria-hidden="true"></i>
 
           <p>
@@ -266,10 +268,10 @@
 
 
     <!-- ## Start CV Section ## -->
-    <section class="cv section-padding" id="cv">
+    <section class="cv section-padding reveal-item" id="cv">
       <div class="container">
 
-        <div class="section-heading">
+        <div class="section-heading reveal-item">
           <p class="section-eyebrow">EXPERIENCE & QUALIFICATIONS</p>
           <h2>الخبرة <span>والمؤهلات</span></h2>
           <p class="section-description">
@@ -279,7 +281,7 @@
 
         <div class="cv-layout">
 
-          <div class="cv-intro">
+          <div class="cv-intro reveal-item">
             <div class="cv-icon">
               <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
             </div>
@@ -298,9 +300,9 @@
             </a>
           </div>
 
-          <div class="cv-timeline">
+          <div class="cv-timeline reveal-item">
 
-            <article class="cv-item">
+            <article class="cv-item reveal-item">
               <span class="cv-item-marker" aria-hidden="true"></span>
 
               <p class="cv-item-label">الخبرة المهنية</p>
@@ -312,7 +314,7 @@
               </p>
             </article>
 
-            <article class="cv-item">
+            <article class="cv-item reveal-item">
               <span class="cv-item-marker" aria-hidden="true"></span>
 
               <p class="cv-item-label">مجال التخصص</p>
@@ -324,7 +326,7 @@
               </p>
             </article>
 
-            <article class="cv-item">
+            <article class="cv-item reveal-item">
               <span class="cv-item-marker" aria-hidden="true"></span>
 
               <p class="cv-item-label">المؤهل الدراسي</p>
@@ -339,7 +341,7 @@
           </div>
         </div>
 
-        <p class="cv-note">
+        <p class="cv-note reveal-item">
           * ستُراجع تفاصيل المؤهلات والتواريخ والمسميات المهنية
           وفقًا للسيرة الذاتية الأصلية قبل نشر الموقع.
         </p>
@@ -350,10 +352,10 @@
 
 
     <!-- ## Start Contact Section ## -->
-    <section class="contact section-padding" id="contact">
+    <section class="contact section-padding reveal-item" id="contact">
       <div class="container">
 
-        <div class="section-heading">
+        <div class="section-heading reveal-item">
           <p class="section-eyebrow">LET'S GET IN TOUCH</p>
           <h2>ابدأ <span>رحلتك</span> مع الإنجليزي</h2>
           <p class="section-description">
@@ -361,7 +363,7 @@
           </p>
         </div>
 
-        <div class="contact-card">
+        <div class="contact-card reveal-item">
 
           <div class="contact-message">
             <span class="contact-icon">
@@ -379,7 +381,7 @@
           <div class="contact-methods">
 
             <!-- استبدل # برابط واتساب الحقيقي -->
-            <a class="contact-method" href="#" aria-label="التواصل عبر واتساب">
+            <a class="contact-method reveal-item" href="#" aria-label="التواصل عبر واتساب">
               <span class="contact-method-icon whatsapp-icon">
                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
               </span>
@@ -393,7 +395,7 @@
             </a>
 
             <!-- استبدل # برقم الهاتف أو رابط الاتصال -->
-            <a class="contact-method" href="#" aria-label="الاتصال بمستر أحمد">
+            <a class="contact-method reveal-item" href="#" aria-label="الاتصال بمستر أحمد">
               <span class="contact-method-icon phone-icon">
                 <i class="fa-solid fa-phone" aria-hidden="true"></i>
               </span>
@@ -422,12 +424,12 @@
   <!-- ## End Main Content ## -->
 
   <!-- ## Start Footer ## -->
-  <footer class="site-footer">
+  <footer class="site-footer reveal-item">
     <div class="container">
       <div class="footer-content">
 
         <!-- Logo & Brief Info -->
-        <div class="footer-brand">
+        <div class="footer-brand reveal-item">
           <a href="#" class="footer-logo">
             <img src="assets/imgs/logo.webp" alt="شعار الأستاذ أحمد المرسي" loading="lazy">
             <div class="footer-logo-text">
@@ -441,7 +443,7 @@
         </div>
 
         <!-- Social Links -->
-        <div class="footer-social-wrapper">
+        <div class="footer-social-wrapper reveal-item">
           <h4 class="footer-title">تواصل معي</h4>
           <div class="social-links">
             <!-- WhatsApp Link (استبدل 201000000000 برقم الواتساب الحقيقي) -->
