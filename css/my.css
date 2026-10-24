@@ -677,7 +677,6 @@ header .header-links a:focus-visible {
 
 /* ## End Header ## */
 
-
 /* ## Start Intro Overlay ## */
 .intro {
   --intro-bg: #050b14;
@@ -699,28 +698,25 @@ header .header-links a:focus-visible {
   min-height: 100svh;
   overflow: hidden;
   padding: 35px 20px;
+
+  /* الخلفية الافتراضية للـ Intro (تتغير حسب الثيم) */
   background: transparent;
+
   opacity: 1;
   visibility: visible;
-  transition:
-    opacity 0.35s ease,
-    visibility 0s linear 0s;
+  transition: opacity 0.35s ease, visibility 0s linear 0s, background 0.4s ease;
 }
 
-
 .intro.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity 0.35s ease,
-    visibility 0s linear 0.35s;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
 }
 
 .intro.is-removed {
   display: none !important;
 }
-
 
 /* Spotlight */
 .intro .spotlight {
@@ -737,7 +733,6 @@ header .header-links a:focus-visible {
   animation: spotlight-on 2s 0.2s ease forwards;
 }
 
-
 /* Particles */
 .intro .particles {
   position: absolute;
@@ -747,7 +742,6 @@ header .header-links a:focus-visible {
   height: 100%;
   pointer-events: none;
 }
-
 
 /* Decorative Frames */
 .intro .frame {
@@ -938,7 +932,7 @@ header .header-links a:focus-visible {
   width: 7px;
   height: 7px;
   content: "";
-  background: var(--page-background);
+  background: #e2dfdf;
   border-radius: 50%;
   box-shadow: 0 0 10px var(--page-background), 0 0 25px var(--intro-gold);
   transform: translate(-50%, -50%);
@@ -1056,13 +1050,51 @@ header .header-links a:focus-visible {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   content: "";
-  background: var(--page-background);
+  background: #cbc7c7;
   border-radius: 50%;
   box-shadow: 0 0 10px var(--intro-blue), 0 0 25px var(--intro-blue);
   transform: translate(-50%, -50%);
+}
+
+body.theme-light .intro {
+  background-color: white;
+
+  .spotlight {
+    background: linear-gradient(180deg, rgb(106 157 214 / 34%), transparent 80%);
+  }
+
+  .name span {
+    background: linear-gradient(100deg, #b98336, #0678b6 35%, #367ea9 58%, #4c8670 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .side-text span:nth-child(even) {
+    color: #ffc10775;
+    font-size: 8px;
+    text-shadow: 0 0 10px rgb(255 193 7);
+  }
+
+  .eyebrow {
+    color: #b2a477 !important;
+  }
+
+  .frame::before,
+  .frame::after {
+    position: absolute;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    content: "";
+    background: #ffffff !important;
+    border: 1px solid #946408 !important;
+    box-shadow: 0 0 5px 1px rgb(232 154 0) !important;
+    transform: translateX(-50%) rotate(45deg);
+  }
 }
 
 /* Intro Animations */
