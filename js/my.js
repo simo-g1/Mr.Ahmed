@@ -559,21 +559,21 @@ if (intro && introSeen) {
   let energyWaves = [];
 
   function initSystem() {
-    alphabets = [];
+    // قللنا العدد شوية عشان الخفة وسرعة الـ FPS
+    const isMobile = window.innerWidth < 768;
 
-    for (let i = 0; i < 40; i++) {
+    alphabets = [];
+    for (let i = 0; i < (isMobile ? 15 : 30); i++) {
       alphabets.push(new FloatingAlphabet());
     }
 
     words = [];
-
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < (isMobile ? 6 : 10); i++) {
       words.push(new FloatingWord());
     }
 
     dustParticles = [];
-
-    for (let i = 0; i < 70; i++) {
+    for (let i = 0; i < (isMobile ? 25 : 45); i++) {
       dustParticles.push(new CyanDustParticle());
     }
 

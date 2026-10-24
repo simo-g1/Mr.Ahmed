@@ -2322,3 +2322,16 @@ body.loading header,
   visibility: hidden !important;
   pointer-events: none !important;
 }
+
+/* تحسين أداء التمرير والعرض للأقسام الثقيلة */
+section,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
+/* تسريع رسوميات الـ GPU */
+.hero .image img,
+.intro-logo {
+  will-change: transform, opacity;
+}
