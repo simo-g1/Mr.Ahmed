@@ -160,33 +160,15 @@ if (header) {
 /* ==================== Intro Animation Integration ==================== */
 const introSeen = sessionStorage.getItem("introSeen");
 
-function finishIntro() {
-  if (intro) {
-    intro.classList.add("is-hidden", "is-removed");
-  }
-  document.body.classList.remove("loading");
-  introFinished = true;
-  updateHeader();
-
-  // تشغيل الـ Reveal فور اختفاء الـ Intro
-  if (typeof window.initScrollReveal === "function") {
-    window.initScrollReveal();
-  }
-}
-
 if (intro && introSeen) {
   finishIntro();
 } else if (intro) {
   sessionStorage.setItem("introSeen", "true");
-
-  window.setTimeout(() => {
-    intro.classList.add("is-hidden");
-    window.setTimeout(() => {
-      finishIntro();
-    }, 350);
-  }, 3000);
+  window.setTimeout(finishIntro, 3000);
+} else {
+  document.body.classList.remove("loading");
+  initScrollReveal();
 }
-
 
 /* ==================== Shared Background ==================== */
 
@@ -237,6 +219,7 @@ if (intro && introSeen) {
   let burstParticles = [];
 
   window.addEventListener("click", (event) => {
+    if (burstParticles.length >= 72) return;
     const clickX = event.clientX;
     const clickY = event.clientY;
 
@@ -627,14 +610,12 @@ if (intro && introSeen) {
       alphabet.draw();
     });
 
-    burstParticles.forEach((particle, index) => {
+    burstParticles.forEach((particle) => {
       particle.update();
       particle.draw();
-
-      if (particle.alpha <= 0) {
-        burstParticles.splice(index, 1);
-      }
     });
+
+    burstParticles = burstParticles.filter((particle) => particle.alpha > 0);
 
     requestAnimationFrame(animate);
   }
@@ -704,15 +685,5 @@ function finishIntro() {
   });
 
   // تشغيل الـ Observer لباقي أقسام الموقع
-  initScrollReveal();
-}
-
-// تشغيل الـ Intro لمدة 3 ثوانٍ ثم إنهاؤه وتشغيل الموقع
-if (intro) {
-  window.setTimeout(() => {
-    finishIntro();
-  }, 3000);
-} else {
-  document.body.classList.remove("loading");
   initScrollReveal();
 }

@@ -878,6 +878,15 @@ header .header-links a:focus-visible {
   text-align: center;
 }
 
+.intro-content::before {
+  content: "";
+  position: absolute;
+  inset: -40px -60px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(3, 7, 18, 0.85) 0%, rgba(3, 7, 18, 0.5) 55%, transparent 75%);
+}
+
 .intro .eyebrow {
   margin: 0 0 24px;
   color: var(--intro-gold-light);
