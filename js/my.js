@@ -3,9 +3,6 @@
 const header = document.querySelector("#header");
 const headerPlaceholder = document.querySelector(".header-placeholder");
 
-const menuToggle = document.querySelector("#menu-toggle");
-const mainNav = document.querySelector("#main-nav");
-
 const themeToggle = document.querySelector("#theme-toggle");
 
 const intro = document.querySelector("#intro");
@@ -18,65 +15,6 @@ const bgContainer = document.querySelector("#bgContainer");
 
 if (intro && !sessionStorage.getItem("introSeen")) {
   document.body.classList.add("loading");
-}
-
-
-/* ==================== Navigation Menu ==================== */
-
-function closeMenu() {
-  if (!mainNav || !menuToggle) return;
-
-  mainNav.classList.remove("is-open");
-
-  menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", "Open navigation menu");
-
-  menuToggle.innerHTML =
-    '<i class="fa-solid fa-bars" aria-hidden="true"></i>';
-}
-
-function openMenu() {
-  if (!mainNav || !menuToggle) return;
-
-  mainNav.classList.add("is-open");
-
-  menuToggle.setAttribute("aria-expanded", "true");
-  menuToggle.setAttribute("aria-label", "Close navigation menu");
-
-  menuToggle.innerHTML =
-    '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
-}
-
-if (menuToggle && mainNav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = mainNav.classList.contains("is-open");
-
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  });
-
-  mainNav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  document.addEventListener("click", (event) => {
-    if (
-      !mainNav.contains(event.target) &&
-      !menuToggle.contains(event.target)
-    ) {
-      closeMenu();
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
-      closeMenu();
-      menuToggle.focus();
-    }
-  });
 }
 
 
@@ -687,3 +625,12 @@ function finishIntro() {
   // تشغيل الـ Observer لباقي أقسام الموقع
   initScrollReveal();
 }
+
+
+/* ==================== Career Timeline ==================== */
+
+// TODO (Simo): اكتب الكود هنا
+// 1) هات كل .career-dot وكل .career-detail بـ querySelectorAll
+// 2) على كل dot اعمل addEventListener("click", ...)
+// 3) جوه الـ click: شيل is-active من الكل، وضيفه على الـ dot
+//    وعلى الكارت اللي id بتاعه جوه dot.dataset.target
