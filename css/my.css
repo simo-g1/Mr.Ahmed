@@ -969,7 +969,6 @@ header .header-actions {
 }
 
 body.theme-light .intro {
-  background-color: white;
 
   .spotlight {
     background: linear-gradient(180deg, rgb(106 157 214 / 34%), transparent 80%);
@@ -980,6 +979,16 @@ body.theme-light .intro {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+
+  .intro-content::before {
+    content: "";
+    position: absolute;
+    inset: -40px -60px;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(239, 239, 242, 0.685) 0%, rgba(248, 249, 250, 0.734) 55%, transparent 75%);
   }
 
   .side-text span:nth-child(even) {

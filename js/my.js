@@ -628,13 +628,23 @@ function finishIntro() {
 
 
 /* ==================== Career Timeline ==================== */
+const careerDetails = document.querySelectorAll(".career-detail");
+const careerDots = document.querySelectorAll(".career-dot");
 
-// TODO (Simo): اكتب الكود هنا
-// 1) هات كل .career-dot وكل .career-detail بـ querySelectorAll
-// 2) على كل dot اعمل addEventListener("click", ...)
-// 3) جوه الـ click: شيل is-active من الكل، وضيفه على الـ dot
-//    وعلى الكارت اللي id بتاعه جوه dot.dataset.target
-
+careerDots.forEach((dot) => {
+  dot.addEventListener("click", () => {
+    careerDots.forEach((classRemover) => {
+      classRemover.classList.remove("is-active");
+    })
+    careerDetails.forEach((classRemover) => {
+      classRemover.classList.remove("is-active");
+    })
+    dot.classList.add("is-active");
+    const careerDot = dot.dataset.target;
+    const careerDetail = document.getElementById(careerDot);
+    careerDetail.classList.add("is-active");
+  });
+});
 /* ==================== Floating Contact Button ==================== */
 
 const floatingContact = document.querySelector(".floating-contact");
