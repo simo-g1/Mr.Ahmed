@@ -634,3 +634,26 @@ function finishIntro() {
 // 2) على كل dot اعمل addEventListener("click", ...)
 // 3) جوه الـ click: شيل is-active من الكل، وضيفه على الـ dot
 //    وعلى الكارت اللي id بتاعه جوه dot.dataset.target
+
+/* ==================== Floating Contact Button ==================== */
+
+const floatingContact = document.querySelector(".floating-contact");
+const hideTargets = document.querySelectorAll("#contact, .site-footer");
+
+if (floatingContact && hideTargets.length) {
+  const visibleTargets = new Set();
+
+  const contactObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        visibleTargets.add(entry.target);
+      } else {
+        visibleTargets.delete(entry.target);
+      }
+    });
+
+    floatingContact.classList.toggle("is-hidden", visibleTargets.size > 0);
+  });
+
+  hideTargets.forEach((target) => contactObserver.observe(target));
+}
