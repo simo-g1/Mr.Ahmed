@@ -640,9 +640,9 @@ careerDots.forEach((dot) => {
       classRemover.classList.remove("is-active");
     })
     dot.classList.add("is-active");
-    const careerDot = dot.dataset.target;
-    const careerDetail = document.getElementById(careerDot);
-    careerDetail.classList.add("is-active");
+    const targetId = dot.dataset.target;
+    const targetCard = document.getElementById(targetId);
+    targetCard.classList.add("is-active");
   });
 });
 /* ==================== Floating Contact Button ==================== */
